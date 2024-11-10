@@ -1,0 +1,31 @@
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Python related
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# My Ignores
+.idea/
+.idea/*
+.idea
+*.log
+*.sqlite3
+*.zip
+*.rar
+
+# Git
+.git/
+.gitignore
+
+# Docker
+Dockerfile
+docker-compose.yml
