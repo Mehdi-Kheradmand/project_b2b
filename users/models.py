@@ -7,7 +7,7 @@ from rest_framework.exceptions import ValidationError
 def validate_credit_balance(value):
     if value < 0:
         raise ValidationError("Credit balance cannot be negative.")
-    if value > 1000000:
+    if value > 999999999999999:
         raise ValidationError("Credit balance cannot be more than 999,999,999,999,999.")
     return value
 

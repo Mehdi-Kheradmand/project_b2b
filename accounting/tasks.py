@@ -3,9 +3,10 @@ from django.db import transaction
 from django.db.models import F
 from django.utils import timezone
 from celery import shared_task
-from accounting.models import RechargeRequest, Transaction, CreditRequest
+from .models import RechargeRequest, Transaction, CreditRequest
 from phones.models import Phone
 from django.contrib.auth import get_user_model
+
 User = get_user_model()
 
 logger = logging.getLogger(__name__)
@@ -17,7 +18,14 @@ def recharge_task(recharge_request_id: int):
 
     # check seller credit balance
     try:
+        logger.info(f"getting RechargeRequest based on this id: {recharge_request_id}")
+        all_rr = RechargeRequest.objects.all()
+        logger.info(f"RechargeRequest ids: ")
+        for rr in all_rr:
+            logger.info(rr.id)
+
         recharge_request = RechargeRequest.objects.select_related('seller', 'phone').get(id=recharge_request_id)
+        logger.info("RechargeRequest Received")
         seller = recharge_request.seller
         requested_phone = Phone.objects.get(id=recharge_request.phone_id)
 
@@ -92,8 +100,5 @@ def credit_approve_task(admin_id: int, credit_request_id: int):
 
 @shared_task
 def test_task():
-    logger.error("is working")
-    logger.error("is working")
-    logger.error("is working")
+    logger.info("is working")
     logger.error("done")
-    print("it is working")
