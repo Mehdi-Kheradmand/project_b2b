@@ -131,7 +131,7 @@ class RechargeRequestView(APIView):
             # Save the recharge request
             recharge_request: RechargeRequest = serializer.save(seller=request.user)
             recharge_task.delay(recharge_request.id)  # Add task
-            logger.error("recharge task added")
+            logger.info("recharge task added")
             return Response(
                 data={'detail': "Recharge request created, will be processed soon"},
                 status=status.HTTP_201_CREATED)

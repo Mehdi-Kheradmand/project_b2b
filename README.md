@@ -85,6 +85,7 @@ This project includes unit tests to ensure the functionality of critical compone
 
 ### Running Tests
 To run tests, make sure Docker services are up and running, then execute:
+
 docker-compose exec b2b_django python manage.py test
 
 
